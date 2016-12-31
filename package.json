@@ -1,6 +1,6 @@
 {
   "name": "newsletter-ses",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Send newsletters using AWS SES",
   "main": "index.js",
   "scripts": {

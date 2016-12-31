@@ -4,9 +4,6 @@ Send newsletters using AWS SES
 [![Build Status](https://travis-ci.org/demsking/newsletter-ses.svg?branch=master)](https://travis-ci.org/demsking/newsletter-ses)
 [![bitHound Overall Score](https://www.bithound.io/github/demsking/newsletter-ses/badges/score.svg)](https://www.bithound.io/github/demsking/newsletter-ses)
 [![bitHound Dependencies](https://www.bithound.io/github/demsking/newsletter-ses/badges/dependencies.svg)](https://www.bithound.io/github/demsking/newsletter-ses/master/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/github/demsking/newsletter-ses/badges/devDependencies.svg)](https://www.bithound.io/github/demsking/newsletter-ses/master/dependencies/npm)
-[![bitHound Code](https://www.bithound.io/github/demsking/newsletter-ses/badges/code.svg)](https://www.bithound.io/github/demsking/newsletter-ses)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 # Install
 ```sh
