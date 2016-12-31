@@ -1,5 +1,3 @@
 'use strict'
 
-module.exports = {
-    lists: require('./lib/lists')
-}
+module.exports = require('./lib/lists')
