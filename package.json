@@ -1,6 +1,6 @@
 {
   "name": "newsletter-ses",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Send newsletters using AWS SES",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,8 @@
   "keywords": [
     "newsletter",
     "aws-ses",
-    "simple notification service",
+    "aws",
+    "ses",
     "email",
     "mail"
   ],
