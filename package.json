@@ -1,0 +1,18 @@
+{
+  "name": "newsletter-ses",
+  "version": "1.0.0",
+  "description": "Send newsletters using AWS SES",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "coverage": "istanbul cover _mocha"
+  },
+  "author": "Sébastien Demanou",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.7.19",
+    "html-to-text": "^3.0.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0"
+  }
+}
