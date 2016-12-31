@@ -18,13 +18,13 @@ AWS.SES = function (config) {
         getSendQuota: (options, done) =>
             done(options.success === false ? new Error('failed to get quota') : false, quota),
         sendEmail: (params, done) => 
-            setTimeout(() => done(sending_status ? false : new Error('Test error'), params), 0)
+            done(sending_status ? false : new Error('Test error'), params)
     }
 }
 
-const config = require('./test')
-const messager = require('../lib/message').configure(config.aws)
-const lists = require('../lib/lists')
+const config = require('./test.json')
+const messager = require('../lib/message').configure(config.ses)
+const newsletter = require('../lib/lists').configure(config.ses)
 
 describe('message', () => {
     describe('messager.load', () => {
@@ -150,19 +150,17 @@ describe('message', () => {
 describe('lists', function() {
     this.timeout(5000)
     
+    config.lists.forEach((list) => {
+        if (list.message.url) {
+            list.message = fs.readFileSync(list.message.url).toString()
+        }
+    })
+    
     describe('lists.send', function() {
-        config.lists.forEach((list) => {
-            if (list.message.url) {
-                list.message = fs.readFileSync(list.message.url).toString()
-            }
-        })
-        
-        const mta = lists.configure(config.aws)
-        
         it('should send lists', (done) => {
             sending_status = true
             
-            mta.send({ success: true }, config.lists)
+            newsletter.send({ success: true }, config.lists)
                 .on('finish', (e) => done())
         })
         
@@ -171,7 +169,7 @@ describe('lists', function() {
             
             sending_status = false
             
-            mta.send(config.lists)
+            newsletter.send(config.lists)
                 .on('error', (e) => { 
                     sending_status = true
                     
@@ -187,7 +185,7 @@ describe('lists', function() {
         })
         
         it('should not send lists (quota.error)', (done) => {
-            mta.send({ success: false }, config.lists)
+            newsletter.send({ success: false }, config.lists)
                 .on('quota.error', () => done())
         })
     })

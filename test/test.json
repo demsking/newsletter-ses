@@ -1,5 +1,5 @@
 {
-    "aws": {
+    "ses": {
         "accessKeyId": "7187fa1fcf3211e6", 
         "secretAccessKey": "7187fa1f-cf32-11e6-8edf+e3d56a8d0e0", 
         "region": "eu-west-1"
