@@ -150,17 +150,13 @@ describe('message', () => {
 describe('lists', function() {
     this.timeout(5000)
     
-    config.lists.forEach((list) => {
-        if (list.message.url) {
-            list.message = fs.readFileSync(list.message.url).toString()
-        }
-    })
+    const getLists = () => JSON.parse(JSON.stringify(config.lists))
     
     describe('lists.send', function() {
         it('should send lists', (done) => {
             sending_status = true
             
-            newsletter.send({ success: true }, config.lists)
+            newsletter.send({ success: true }, getLists())
                 .on('finish', (e) => done())
         })
         
@@ -169,7 +165,7 @@ describe('lists', function() {
             
             sending_status = false
             
-            newsletter.send(config.lists)
+            newsletter.send(getLists())
                 .on('error', (e) => { 
                     sending_status = true
                     
@@ -185,7 +181,7 @@ describe('lists', function() {
         })
         
         it('should not send lists (quota.error)', (done) => {
-            newsletter.send({ success: false }, config.lists)
+            newsletter.send({ success: false }, getLists())
                 .on('quota.error', () => done())
         })
     })
