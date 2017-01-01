@@ -97,6 +97,7 @@
             "name": "Newsletter Test List #1",
             "sender": "newsletter@example.com",
             "members": [ "test@example.com" ],
+            "sendReportTo": [ "admin@example.com" ],
             "batch": {
                 "interval": 0,
                 "limit": 100

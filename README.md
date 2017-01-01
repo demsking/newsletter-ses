@@ -5,12 +5,22 @@ Send newsletters using AWS SES
 [![bitHound Overall Score](https://www.bithound.io/github/demsking/newsletter-ses/badges/score.svg)](https://www.bithound.io/github/demsking/newsletter-ses)
 [![bitHound Dependencies](https://www.bithound.io/github/demsking/newsletter-ses/badges/dependencies.svg)](https://www.bithound.io/github/demsking/newsletter-ses/master/dependencies/npm)
 
-# Install
-```sh
+1. [Install](#install)
+2. [Config format](#config)
+3. [CLI usage](#cli)
+4. [Programmatic usage](#node)
+5. [License](#license)
+
+# <a name="install">Install</a>
+```shell
+# to install as a dependency
 npm install --save newsletter-ses
+
+# to install the binary
+npm install -g newsletter-ses
 ```
 
-# Usage
+# <a name="config">The config format</a>
 
 The configuration format:
 
@@ -101,10 +111,58 @@ const config = {
 }
 ```
 
-Then:
+## <a name="cli">CLI usage</a>
+
+Firstly install `newsletter-ses` in the global environment:
+
+`npm install -g newsletter-ses`
+
+Then open the terminal and pass the JSON config to the `newsletter-ses`'s CLI:
+
+```shell
+newsletter-ses '{"ses": {...}, "lists": [ ... ]}'
+```
+
+You can also use pipe `|`:
+
+```shell
+# use local config
+cat path/to/config.json | newsletter-ses
+
+# use remote config
+curl https://example.com/config.json | newsletter-ses
+```
+
+So with this previous example, you can use `cron` to send daily newsletter:
+
+```shell
+# send newsletter at 08:00 AM, Monday through Friday
+cron 0 8 * * 1-5 curl https://example.com/api/rest/daily | newsletter-ses
+```
+
+### Specific CLI feature
+
+When using the CLI, you can use the config `list.sendReportTo` to automatically send report when the sending job is complete:
+
+```js
+const config = {
+    ses: { ... },
+    lists: [
+        {
+            ...
+            sendReportTo: [
+                'admin@example.com'
+            ]
+        }
+    ]
+}
+```
+
+## <a name="node">Programmatic usage</a>
 
 ```js
 const newsletter = require('newsletter-ses')
+const config = require('./config.json')
 
 newsletter.configure(config.ses)
     .send(config.lists)
@@ -179,6 +237,6 @@ newsletter.configure(config.ses)
         .on('finish', () => console.log(`Finished to send ${config.lists.length} lists`))
 ```
 
-## License
+## <a name="license">License</a>
 
 Under the MIT license. See [LICENSE](https://github.com/demsking/newsletter-ses/blob/master/LICENSE) file for more details.
