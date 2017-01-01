@@ -31,7 +31,8 @@ const config = {
             "sender": "newsletter@example.com",
             // The list for members
             "members": [
-                { "email": "test@example.com" } 
+                "test1@example.com",
+                "test2@example.com"
             ],
             // message to send
             "message": {
@@ -44,7 +45,7 @@ const config = {
             "id": "newsletter-test-2",
             "name": "Newsletter Test List #2",
             "sender": "newsletter@example.com",
-            "members": [ { "email": "test@example.com" } ],
+            "members": [ "test@example.com" ],
             "message": {
                 // Node the missing subject field: 
                 // it will be generate from the <title> tag in the HTML content
@@ -64,7 +65,7 @@ const config = {
             "id": "newsletter-test-3",
             "name": "Newsletter Test List #3",
             "sender": "newsletter@example.com",
-            "members": [ { "email": "test@example.com" } ],
+            "members": [ "test@example.com" ],
             "message": {
                 "html": `
                     <html>
@@ -83,7 +84,7 @@ const config = {
             "id": "newsletter-test-4",
             "name": "Newsletter Test List #4",
             "sender": "newsletter@example.com",
-            "members": [ { "email": "test@example.com" } ],
+            "members": [ "test@example.com" ],
             // You can pass your message directly as a string.
             // The message.subject and message.plain will be generate
             "message": `
