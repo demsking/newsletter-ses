@@ -112,20 +112,17 @@ newsletter.configure(config.ses)
             console.log(`Failed to get send quota`, e)
         })
         .on('start', (e) => {
-            console.log(e)
             /*
-                ==> 
+                console.log(e) ==> 
                 { 
-                    list: { 
-                        // the current list
+                    report: {
+                        listId: 'newsletter-test-1',
+                        sender: 'newsletter@example.com',
+                        start: '2016-12-31T17:25:05.380Z',
+                        sent: [],
+                        error: []
                     },
-                    mail: { 
-                        subject: 'Hello, World',
-                        html: '<p>The newsletter body in HTML</p>',
-                        plain: 'The newsletter body in Plain Text'
-                    },
-                    sender: 'newsletter@example.com',
-                    start: '2016-12-31T17:25:05.380Z'
+                    list: { ... },   // the current list
                 }
             */
             
@@ -133,52 +130,47 @@ newsletter.configure(config.ses)
         })
         .on('batch', (e) => console.log(`batch ${e.iteration}/${e.cycle}`))
         .on('error', (e) => {
-            console.log(e)
             /*
-                ==> 
+                console.log(e) ==> 
                 { 
-                    list: { ... },              // the current list
-                    member: 'user@example.com', // the current user
                     time: 2102.321,             // time of the sending operation in ms
+                    member: 'user@example.com', // the current user
                     report: "...",              // the error stack
-                    error: { ... }              // the error object
+                    error: { ... },             // the error object
+                    list: { ... }               // the current list
                 }
             */
             
             console.log(`Error when sending an email to ${e.member.email} (${e.time} ms)`)
         })
         .on('sent', (e) => {
-            console.log(e)
             /*
-                ==> 
+                console.log(e) ==> 
                 { 
-                    list: { ... },              // the current list
-                    member: 'user@example.com', // the current user
                     time: 2102.321,             // time of the sending operation in ms
+                    member: 'user@example.com', // the current user
                     report: "...",              // the sucess request result
+                    list: { ... }               // the current list
                 }
             */
             
             console.log(`Sent to ${e.member.email} (${e.time} ms)`)
         })
         .on('complete', (e) => {
-            console.log(e)
             /*
-                ==> 
+                console.log(e) ==> 
                 { 
-                    list: { ... },              // the current list
-                    member: 'user@example.com', // the current user
                     time: 16441.023,            // time of the operation in ms
                     report: {
-                        list: { ... },          // the current list
-                        mail: { ... },
+                        listId: 'newsletter-test-1',
                         sender: 'newsletter@example.com',
                         start: '2016-12-31T17:25:05.380Z',
                         end: '2016-12-31T17:25:21.380Z',
                         sent: [ ... ],          // the list of success members
-                        error: [],              // the list of faillure members
+                        error: [ ... ],         // the list of failure members
                         duration: 16441.023
-                    }
+                    },
+                    list: { ... }               // the current list
                 }
             */
             
