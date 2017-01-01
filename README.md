@@ -120,24 +120,28 @@ Firstly install `newsletter-ses` in the global environment:
 Then open the terminal and pass the JSON config to the `newsletter-ses`'s CLI:
 
 ```shell
+# simple usage
 newsletter-ses '{"ses": {...}, "lists": [ ... ]}'
+
+# redirect output to a file
+newsletter-ses '{"ses": {...}, "lists": [ ... ]}' > output.log
 ```
 
 You can also use pipe `|`:
 
 ```shell
 # use local config
-cat path/to/config.json | newsletter-ses
+cat path/to/config.json | newsletter-ses > output.log
 
 # use remote config
-curl https://example.com/config.json | newsletter-ses
+curl https://example.com/config.json | newsletter-ses > output.log
 ```
 
 So with this previous example, you can use `cron` to send daily newsletter:
 
 ```shell
 # send newsletter at 08:00 AM, Monday through Friday
-cron 0 8 * * 1-5 curl https://example.com/api/rest/daily | newsletter-ses
+cron 0 8 * * 1-5 curl https://example.com/api/rest/daily | newsletter-ses > daily-`date +%Y%m%d_%H%M%S`.log
 ```
 
 ### Specific CLI feature
