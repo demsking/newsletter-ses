@@ -96,7 +96,7 @@
             "id": "newsletter-test-1",
             "name": "Newsletter Test List #1",
             "sender": "newsletter@example.com",
-            "members": [ { "email": "test@example.com" } ],
+            "members": [ "test@example.com" ],
             "batch": {
                 "interval": 0,
                 "limit": 100
@@ -107,7 +107,7 @@
             "id": "newsletter-test-2",
             "name": "Newsletter Test List #2",
             "sender": "newsletter@example.com",
-            "members": [ { "email": "test@example.com" } ],
+            "members": [ "test@example.com" ],
             "batch": {
                 "interval": 0,
                 "limit": 100
