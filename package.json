@@ -1,8 +1,9 @@
 {
   "name": "newsletter-ses",
-  "version": "1.0.4",
+  "version": "1.0.0",
   "description": "Send newsletters using AWS SES",
   "main": "index.js",
+  "bin": "bin/newsletter-ses",
   "scripts": {
     "test": "mocha",
     "coverage": "istanbul cover _mocha"
