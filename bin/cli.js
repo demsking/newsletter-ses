@@ -54,6 +54,8 @@ const run = (config) => {
             if (e.list.sendReportTo && e.list.sendReportTo.length) {
                 delete e.list.quota.ResponseMetadata
                 
+                const subject = e.list.message.subject || e.list.id
+                
                 e.list.message.html = 
                     '<pre>' + 
                         e.list.message.html.trim().replace(re, (entity) => entities[entity]) +
@@ -61,7 +63,7 @@ const run = (config) => {
                 e.list.message = JSON.stringify(e, null, 4)
                 
                 e.list.message = {
-                    subject: 'Newsletter has been sent, ' + (e.list.name || e.list.id),
+                    subject: 'Newsletter has been sent, ' + subject,
                     html: '<html><body><pre>' + e.list.message + '</pre></body></html>',
                     plain: e.list.message
                 }
