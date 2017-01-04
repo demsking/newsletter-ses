@@ -41,6 +41,8 @@ const run = (config) => {
     
     const entities = { '&': '&amp;', '<': '&lt;', '>': '&gt;' }
     const re = new RegExp(Object.keys(entities).join('|'), 'g')
+    const suffix = '-report'
+    const report_sent_limit = 10
     
     require('../').configure(config.ses).send(config.lists)
         .on('quota.error', (e) => console.log(`Failed to get send quota`, e))
@@ -49,12 +51,22 @@ const run = (config) => {
         .on('error', (e) => log(e.list.id, `Error when sending an email to ${e.member} (${e.time} ms)`, e.report))
         .on('sent', (e) => log(e.list.id, `Sent to ${e.member} (${e.time} ms)`))
         .on('complete', (e) => {
-            log(e.list.id, `Complete (${e.time} ms)`, e)
+            log(e.list.id, `Complete (${e.time} ms)`, e.list.id.endsWith(suffix) ? null : e)
                    
             if (e.list.sendReportTo && e.list.sendReportTo.length) {
                 delete e.list.quota.ResponseMetadata
                 
-                const subject = e.list.message.subject || e.list.id
+                const sent_size = e.report.sent.length
+                const subject = e.report.error.length > 0
+                    ? sent_size === 0 
+                        ? `An error occured when sending list ${e.list.id}`
+                        : `List has been sent with ${e.report.error.length} errors, ${e.list.id}`
+                    : `List has been sent successfully, ${e.list.message.subject || e.list.id}`
+                
+                if (sent_size > report_sent_limit) {
+                    e.report.sent = e.report.sent.splice(0, report_sent_limit)
+                    e.report.sent.push(`... ${sent_size - report_sent_limit} more members. See logs for the complete list`)
+                }
                 
                 e.list.message.html = 
                     '<pre>' + 
@@ -63,12 +75,12 @@ const run = (config) => {
                 e.list.message = JSON.stringify(e, null, 4)
                 
                 e.list.message = {
-                    subject: 'Newsletter has been sent, ' + subject,
+                    subject: subject,
                     html: '<html><body><pre>' + e.list.message + '</pre></body></html>',
                     plain: e.list.message
                 }
                 
-                e.list.id += '-report'
+                e.list.id += suffix
                 e.list.members = e.list.sendReportTo
                 
                 delete e.list.sendReportTo
