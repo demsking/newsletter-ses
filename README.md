@@ -181,6 +181,7 @@ newsletter.configure(config.ses)
                         listId: 'newsletter-test-1',
                         sender: 'newsletter@example.com',
                         start: '2016-12-31T17:25:05.380Z',
+                        members: 1,             // The number of members in the list
                         sent: [],
                         error: []
                     },
@@ -226,10 +227,11 @@ newsletter.configure(config.ses)
                     report: {
                         listId: 'newsletter-test-1',
                         sender: 'newsletter@example.com',
+                        members: 1,             // The number of members in the list
                         start: '2016-12-31T17:25:05.380Z',
                         end: '2016-12-31T17:25:21.380Z',
-                        sent: [ ... ],          // the list of success members
                         error: [ ... ],         // the list of failure members
+                        sent: [ ... ],          // the list of success members
                         duration: 16441.023
                     },
                     list: { ... }               // the current list
