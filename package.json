@@ -6,7 +6,8 @@
   "bin": "./bin/cli.js",
   "scripts": {
     "test": "mocha",
-    "coverage": "istanbul cover _mocha"
+    "coverage": "istanbul cover _mocha",
+    "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js --verbose"
   },
   "author": "Sébastien Demanou",
   "repository": {
@@ -31,6 +32,7 @@
     "html-to-text": "^3.3.0"
   },
   "devDependencies": {
+    "coveralls": "^3.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^4.0.1"
   }
