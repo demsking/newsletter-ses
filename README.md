@@ -2,8 +2,7 @@
 Send newsletters using AWS SES
 
 [![Build Status](https://travis-ci.org/demsking/newsletter-ses.svg?branch=master)](https://travis-ci.org/demsking/newsletter-ses)
-[![bitHound Overall Score](https://www.bithound.io/github/demsking/newsletter-ses/badges/score.svg)](https://www.bithound.io/github/demsking/newsletter-ses)
-[![bitHound Dependencies](https://www.bithound.io/github/demsking/newsletter-ses/badges/dependencies.svg)](https://www.bithound.io/github/demsking/newsletter-ses/master/dependencies/npm)
+[![Coverage Status](https://coveralls.io/repos/github/demsking/newsletter-ses/badge.svg?branch=master)](https://coveralls.io/github/demsking/newsletter-ses?branch=master)
 
 1. [Install](#install)
 2. [Config format](#config)
